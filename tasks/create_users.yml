@@ -22,7 +22,7 @@
     groups:
       - wheel
     home: /home/patrick # not required. Optionally set the user's home directory.
-    shell: /bin/zsh # not required. Optionally set the user's shell.,On Mac OS X, before version 2.5, the default shell for non-system users was /usr/bin/false. Since 2.5, the default shell for non-system users on Mac OS X is /bin/bash.
+    shell: /bin/bash # not required. Optionally set the user's shell.,On Mac OS X, before version 2.5, the default shell for non-system users was /usr/bin/false. Since 2.5, the default shell for non-system users on Mac OS X is /bin/bash.
     state: present # not required. choices: absent;present. Whether the account should exist or not, taking action if the state is different from what is stated.
 
 - name: Add authorized_keys
