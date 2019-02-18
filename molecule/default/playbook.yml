@@ -1,0 +1,6 @@
+---
+- name: Converge
+  no_log: false
+  hosts: all
+  roles:
+    - role: ansible-oreckzxyz
