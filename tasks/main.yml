@@ -1,0 +1,4 @@
+---
+# tasks file for oreckz.xyz
+- name: Include users
+  include_tasks: create_users.yml

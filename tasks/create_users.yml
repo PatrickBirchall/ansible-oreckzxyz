@@ -1,0 +1,32 @@
+---
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add sudoers users to wheel group
+  user: name=deployer groups=wheel append=yes state=present createhome=yes
+
+- name: Create a non-root user
+  user:
+    name: patrick # required. Name of the user to create, remove or modify.
+    createhome: yes # not required. Unless set to C(no), a home directory will be made for the user when the account is created or if the home directory does not exist.,Changed from C(createhome) to C(create_home) in version 2.5.
+    groups:
+      - wheel
+    home: /home/patrick # not required. Optionally set the user's home directory.
+    shell: /bin/zsh # not required. Optionally set the user's shell.,On Mac OS X, before version 2.5, the default shell for non-system users was /usr/bin/false. Since 2.5, the default shell for non-system users on Mac OS X is /bin/bash.
+    state: present # not required. choices: absent;present. Whether the account should exist or not, taking action if the state is different from what is stated.
+
+- name: Add authorized_keys
+  authorized_key:
+    user: patrick
+    state: present
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOQaz+3x25yhS4/cYPgAET5SXBkgchAkOE/P8ESOkXGigpoYTJTBXdJ00rSCgj9lzs7nYVqJB0bhnpD7aennd67HJLrLnAzQmvErhECDGxSZ8ECeZZBoOMhajczK832/4rZ14VZkGyawf9OCiFdK1AL2F3WgBfUwtRY8eK+LYY118o/wSGKh/an7gwqpHDOkuag7kGfRCTf7Bf9IuurkNZlyKqGC23meeba1G+7HQqIokaBzF+WaQq1m1U2HjhD6IV+vRXjGQRkDhCpYMUKG2FRclB5xu6p17EEOL17FFxo5RTr5lKSUWneHK0w7B/BLeaeghb9lBrfIIEG2CgD3gt patrickbirchall@Patricks-MacBook-Pro.local"
