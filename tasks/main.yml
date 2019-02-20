@@ -2,3 +2,9 @@
 # tasks file for oreckz.xyz
 - name: Users
   include_tasks: create_users.yml
+
+- name: Packages
+  include_tasks: packages.yml
+
+- name: Template site configs
+  include_tasks: nginx_configs.yml

@@ -1,0 +1,21 @@
+---
+- name: Run a Yum update because we're not savages
+  yum: 
+    name: '*'
+    state: latest
+
+- name: Enable EPEL
+  yum: 
+    name: epel-release
+    state: present
+
+- name: Install Nginx
+  yum:
+    name: nginx
+    state: latest
+
+- name: Ensure Nginx is up and running
+  service: 
+    name: nginx
+    enabled: yes
+    state: started
