@@ -19,3 +19,4 @@
     name: nginx
     enabled: yes
     state: started
+  ignore_errors: true

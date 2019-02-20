@@ -1,0 +1,12 @@
+---
+- name: Template in Nginx http configuration
+  template:
+    dest: /etc/nginx/conf.d/oreckz.xyz
+    src: templates/site.conf.j2
+    mode: 0644
+    owner: nginx
+    group: nginx
+
+- name: Validate Configuration
+  shell: 'nginx -t'
+
